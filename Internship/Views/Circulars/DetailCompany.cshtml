@@ -20,7 +20,7 @@
         border: 0.2px solid #bfb6b6;
         overflow: hidden;
     }
-
+    
     .row2 {
         width: 68px;
         height: 25px;
@@ -33,7 +33,6 @@
             <el-tabs v-model="activeName" v-on:click="handleClick">
                 <el-tab-pane label="Báo cáo cân đối kế toán" name="first">
                     <div class="row">
-                        
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-6">
@@ -181,9 +180,7 @@
         </template>
     </div>
 </div>
-
 <script>
-
     Vue.component('my-currency-input', {
         props: ['value','likes','title'],
         template: `
@@ -1355,5 +1352,4 @@
             }
         },
     })
-    
 </script>
