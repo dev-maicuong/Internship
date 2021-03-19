@@ -1,0 +1,180 @@
+﻿
+@{
+    ViewBag.Title = "IndexCirculars";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .el-table .warning-row {
+        background: oldlace;
+    }
+
+    .el-table .success-row {
+        background: #f0f9eb;
+    }
+</style>
+<div class="row" style="margin-top:2%">
+    <div class="col-md-12">
+        <div id="app3">
+            <template>
+                <el-tabs v-model="activeName" v-on:click="handleClick">
+                    <el-tab-pane label="Trực tiếp" name="first">
+                        <el-table :data="tableDataDirect.filter(data => !searchDirect || data.name.toLowerCase().includes(searchDirect.toLowerCase()))"
+                                  style="width: 100%"
+                                  :row-class-name="tableRowClassName">
+                            <el-table-column label="Stt"
+                                             type="index">
+                            </el-table-column>
+                            <el-table-column width="25">
+                                <a href="@Url.Action("DetailCompany","Circulars")"><i class="fas fa-info-circle"></i></a>
+                            </el-table-column>
+                            <el-table-column label="Name"
+                                             prop="name">
+                            </el-table-column>
+                            <el-table-column label="Trạng thái"
+                                             prop="status">
+                            </el-table-column>
+                            <el-table-column label="Ngày bắt đầu"
+                                             prop="startDay">
+                            </el-table-column>
+                            <el-table-column label="ngày kết thúc"
+                                             prop="endDay">
+                            </el-table-column>
+                            <el-table-column align="right">
+                                <template slot="header" slot-scope="scope">
+                                    <el-input v-model="searchDirect"
+                                              size="mini"
+                                              placeholder="Nhập tên công ty cần tìm.." />
+                                </template>
+                                <template slot-scope="scope">
+                                    <el-button size="mini"
+                                               v-on:click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+                                    <el-button size="mini"
+                                               type="danger"
+                                               v-on:click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </el-tab-pane>
+                    <el-tab-pane label="Gián tiếp" name="second">
+                        <el-table :data="tableDataIndirect.filter(data => !searchIndirect || data.name.toLowerCase().includes(searchIndirect.toLowerCase()))"
+                                  style="width: 100%"
+                                  :row-class-name="tableRowClassName">
+                            <el-table-column label="Stt"
+                                             type="index">
+                            </el-table-column>
+                            <el-table-column 
+                                             width="25">
+                                <a href="#"><i class="fas fa-info-circle"></i></a>
+                            </el-table-column>
+                            <el-table-column label="Name"
+                                             prop="name">
+                            </el-table-column>
+                            <el-table-column label="Trạng thái"
+                                             prop="status">
+                            </el-table-column>
+                            <el-table-column label="Ngày bắt đầu"
+                                             prop="startDay">
+                            </el-table-column>
+                            <el-table-column label="ngày kết thúc"
+                                             prop="endDay">
+                            </el-table-column>
+                            <el-table-column align="right">
+                                <template slot="header" slot-scope="scope">
+                                    <el-input v-model="searchIndirect"
+                                              size="mini"
+                                              placeholder="Nhập tên công ty cần tìm.." />
+                                </template>
+                                <template slot-scope="scope">
+                                    <el-button size="mini"
+                                               v-on:click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+                                    <el-button size="mini"
+                                               type="danger"
+                                               v-on:click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </el-tab-pane>
+                    @*<el-tab-pane label="Role" name="third">Role</el-tab-pane>
+                    <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>*@
+                </el-tabs>
+            </template>
+        </div>
+    </div>
+</div>
+<script>
+    var Main = {
+        data() {
+            return {
+                activeName: 'first',
+                tableDataDirect: [{
+                    startDay: '2016-05-03',
+                    endDay: '2016-05-03',
+                    name: 'CÔNG TY TNHH KIDS FIRST VIỆT NAM',
+                    status: 'Đã xem',
+                    address: 'No. 189, Grove St, Los Angeles'
+                }, {
+                        startDay: '2016-05-03',
+                        endDay: '2016-05-03',
+                        name: 'CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ VÀ VẬN TẢI PHÚ AN TÍN',
+                    status: 'chưa xem',
+                    address: 'No. 189, Grove St, Los Angeles'
+                }, {
+                        startDay: '2016-05-03',
+                        endDay: '2016-05-03',
+                        name: 'CÔNG TY TNHH ĂN UỐNG THÀNH PHÁT',
+                    status: 'chưa xem',
+                    address: 'No. 189, Grove St, Los Angeles'
+                }, {
+                        startDay: '2016-05-03',
+                        endDay: '2016-05-03',
+                        name: 'CÔNG TY TNHH QUẢN LÝ VẬN HÀNH NHÀ CHUNG CƯ TRƯỜNG HẢI',
+                    status: 'chưa xem',
+                    address: 'No. 189, Grove St, Los Angeles'
+                }],
+                searchDirect: '',
+                tableDataIndirect: [{
+                    startDay: '2016-05-03',
+                    endDay: '2016-05-03',
+                    name: 'CÔNG TY TNHH THƯƠNG MẠI - CHẾ BIẾN NÔNG LÂM SẢN NHÂN ĐỨC PHÁT',
+                    status: 'chưa xem',
+                    address: 'No. 189, Grove St, Los Angeles'
+                }, {
+                        startDay: '2016-05-03',
+                        endDay: '2016-05-03',
+                        name: 'CÔNG TY TNHH ĐẦU TƯ XÂY DỰNG VÀ THIẾT BỊ HÙNG CƯỜNG',
+                    status: 'chưa xem',
+                    address: 'No. 189, Grove St, Los Angeles'
+                }, {
+                        startDay: '2016-05-03',
+                        endDay: '2016-05-03',
+                        name: 'CÔNG TY TNHH D & D EXPRESS',
+                    status: 'chưa xem',
+                    address: 'No. 189, Grove St, Los Angeles'
+                }, {
+                        startDay: '2016-05-03',
+                        endDay: '2016-05-03',
+                        name: 'CÔNG TY TNHH DỊCH VỤ CUNG ỨNG LAO ĐỘNG SEN VIỆT',
+                    status: 'chưa xem',
+                    address: 'No. 189, Grove St, Los Angeles'
+                }],
+                searchIndirect: '',
+            };
+        },
+        methods: {
+            handleClick(tab, event) {
+                console.log(tab, event);
+            },
+            tableRowClassName({ row, rowIndex }) {
+                if (rowIndex === 1) {
+                    return 'warning-row';
+                } else if (rowIndex === 3) {
+                    return 'success-row';
+                }
+                return '';
+            }
+        }
+    };
+    var Ctor = Vue.extend(Main)
+    new Ctor().$mount('#app3')
+
+</script>
