@@ -17,5 +17,9 @@ namespace Internship.Controllers
         {
             return View();
         }
+        public PartialViewResult Test()
+        {
+            return PartialView();
+        }
     }
 }

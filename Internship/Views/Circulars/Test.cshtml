@@ -1,0 +1,24 @@
+﻿<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<link href="~/Content/ZoomImage/zoomOnHover.css" rel="stylesheet" />
+
+<div id="app">
+
+    <div id="app2">
+        {{ message }}
+    </div>
+</div>
+
+
+<script>
+    var app = new Vue({
+        el: '#app',
+    })
+</script>
+<script>
+    var app = new Vue({
+        el: '#app2',
+        data: {
+            message: 'cương'
+        }
+    })
+</script>

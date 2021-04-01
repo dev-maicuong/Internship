@@ -3,16 +3,20 @@
     ViewBag.Title = "DetailCompany";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
 <style>
+
     table, th, td {
         border: 1px solid #bfb6b6;
         border-collapse: collapse;
         padding: 1%;
         margin-top: 1%
     }
+
     [contenteditable] {
         outline: 0px solid transparent;
     }
+
     .column2 {
         float: left;
         width: 70px;
@@ -20,7 +24,7 @@
         border: 0.2px solid #bfb6b6;
         overflow: hidden;
     }
-    
+
     .row2 {
         width: 68px;
         height: 25px;
@@ -35,146 +39,272 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row">
-                                <div class="col-md-6">
-                                    Công ty cổ phần ABC, Tầng 9 lanmart81, duy tan cầu giấy hà nội
-                                </div>
-                                <div class="col-md-6">
-                                    mẫu số: B01-DN
-                                    (Ban hành theo thông số 133/2014/TT-BTC
-                                    Ngày 22/12/2014 của bộ tài chính)
-                                </div>
-                                <div class="col-md-12" style="text-align:center;font-size:20px;margin-top:2%">
-                                    <strong>Bảng cân đối kế toán</strong>
-                                </div>
-                                <div class="col-md-12" style="text-align:center">
-                                    <strong>Tại ngày 31 tháng 12 năm 2019</strong>
-                                </div>
-                                <div class="col-md-12" style="text-align:center">
-                                    <strong>( Áp dụng cho doanh nghiệp đáp ứng giả định hoạt động liên tục )</strong>
-                                </div>
-                                <div class="col-md-12 text-right">
-                                    <i>Đơn vị tính: VND</i>
-                                </div>
-                                <div class="col-md-12">
-                                    <table class="">
+                                <div class="col-md-12" style="">
+                                    <table style="width:92.2%;background-color:#c1c1c1;border:solid 1px">
                                         <thead>
-                                            <tr style="background-color:#EBEEF5">
-                                                <th style="width:35%">Chỉ tiêu</th>
-                                                <th style="width:10%;text-align:center">Mã số</th>
-                                                <th style="width:30%;text-align:center">Số cuối năm(V1)</th>
-                                                <th style="width:15%;text-align:center">Số cuối năm đọc được(V0)</th>
+                                            <tr style="font-weight:600">
+                                                <td style="width:38%">Chỉ tiêu</td>
+                                                <td style="width: 10.5%; text-align: center">Mã số</td>
+                                                <td style="width: 33%; text-align: center">Số cuối năm(V1)</td>
+                                                <td style="width: 30.5%; text-align: center">Số cuối năm đọc được(V0)</td>
                                             </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="col-md-12" style="height: 540px;overflow: scroll">
+                                    <table class="infinite-list table-fixed">
+                                        <thead>
+                                           
                                         </thead>
                                         <tbody>
                                             <tr v-for="item in tableData" v-if="item.target == 'TÀI SẢN' || item.target == 'NGUỒN VỐN' ||item.code == '110' || item.code == '120'|| item.code == '130'
                                                 || item.code == '140'|| item.code == '150'|| item.code == '160'|| item.code == '170'
                                                 || item.code == '180'|| item.code == '200'|| item.code == '300'|| item.code == '400'|| item.code == '500'">
                                                 <td v-if="item.target == 'TÀI SẢN' || item.target == 'NGUỒN VỐN'"><strong>{{item.target}}</strong></td>
-                                                <td v-else  v-bind:style="{ backgroundColor: item.color}">{{item.target}}</td>
-                                                <td style="text-align:center" v-bind:style="{ backgroundColor: item.color}">{{item.code}}</td>
-                                                <td style="text-align:right" v-bind:style="{ backgroundColor: item.color}">{{item.V1|VND}}</td>
-                                                <td style="text-align:right" v-bind:style="{ backgroundColor: item.color}">{{item.V0|VND}}</td>
+                                                <td v-else>{{item.target}}</td>
+                                                <td style="text-align:center">{{item.code}}</td>
+                                                <td style="text-align:right">
+                                                    <div style="padding: 3%" v-bind:style="{ backgroundColor: item.color}">{{item.V1|VND}}</div>
+                                                </td>
+                                                <td style="text-align:right">{{item.V0|VND}}</td>
                                             </tr>
-                                            <tr>
-                                                <td><strong style="font-size:20px">Chi tiết <i class="fas fa-sort-amount-down"></i></strong></td>
+                                            <tr style="background-color:#c1c1c1">
+                                                <td style="width:35%"></td>
+                                                <td style="width:10%;text-align:center"></td>
+                                                <td style="width:30%;text-align:center"></td>
+                                                <td style="width:15%;text-align:center"></td>
+                                                <td></td>
                                             </tr>
-                                            <tr>
-                                                <td style="width:35%"><strong>Chỉ tiêu</strong></td>
-                                                <td style="width:10%;text-align:center"><strong>Mã số</strong></td>
-                                                <td style="width:30%;text-align:center"><strong>Số cuối năm(V1)</strong></td>
-                                                <td style="width:15%;text-align:center"><strong>Số cuối năm đọc được(V0)</strong></td>
-                                            </tr>
-                                            <tr v-for="(item,index) in tableData">
+                                            <tr v-for="(item,index) in tableData" class="infinite-list-item">
                                                 <td v-if="item.target =='TÀI SẢN' || item.target == 'NGUỒN VỐN'|| item.target == '1'
-                                                    || item.code == '110'  || item.code == '170'"  style="background-color:#EBEEF5">
+                                                    || item.code == '110'  || item.code == '170'">
                                                     <strong>{{item.target}}</strong>
                                                 </td>
-                                                <td v-bind:style="{ backgroundColor: item.color}" v-else-if="item.code == '500' || item.code == '120'|| item.code == '130' || item.code == '140'|| item.code == '150' || item.code == '160' || item.code == '180'|| item.code == '200'|| item.code == '300'|| item.code == '400'">
+                                                <td v-else-if="item.code == '500' || item.code == '120'|| item.code == '130' || item.code == '140'|| item.code == '150' || item.code == '160' || item.code == '180'|| item.code == '200'|| item.code == '300'|| item.code == '400'">
                                                     <strong>{{item.target}}</strong>
                                                 </td>
-                                                <td v-else  style="background-color:#EBEEF5">
+                                                <td v-else>
                                                     {{item.target}}
                                                 </td>
-                                                <td style="text-align:center" v-bind:style="{ backgroundColor: item.color}" v-if="item.code == '500' || item.code == '120'|| item.code == '130' || item.code == '140'|| item.code == '150' || item.code == '160' || item.code == '180'|| item.code == '200'|| item.code == '300'|| item.code == '400'">
+                                                <td style="text-align:center" v-if="item.code == '500' || item.code == '120'|| item.code == '130' || item.code == '140'|| item.code == '150' || item.code == '160' || item.code == '180'|| item.code == '200'|| item.code == '300'|| item.code == '400'">
                                                     {{item.code}}
                                                 </td>
-                                                <td v-else style="text-align:center;background-color:#EBEEF5">
+                                                <td v-else style="text-align:center;">
                                                     {{item.code}}
                                                 </td>
-                                                <td v-if="item.code == '500'||item.target =='(1)'|| item.code == '120'|| item.code == '130'|| item.code == '140'|| item.code == '150'|| item.code == '160'|| item.code == '180'|| item.code == '200'|| item.code == '300'|| item.code == '400'|| item.code == '500'" style="text-align:right" v-bind:style="{ backgroundColor: item.color}">
-                                                    {{item.V1|VND}}
+                                                <td v-if="item.code == '500'||item.target =='(1)'|| item.code == '120'|| item.code == '130'|| item.code == '140'|| item.code == '150'|| item.code == '160'|| item.code == '180'|| item.code == '200'|| item.code == '300'|| item.code == '400'|| item.code == '500'" style="text-align:right">
+                                                    <div style="padding:3%" v-bind:style="{ backgroundColor: item.color}">{{item.V1|VND}} </div>
                                                 </td>
-                                                <td v-else-if="item.target =='TÀI SẢN'||item.target =='NGUỒN VỐN'"  style="background-color:#EBEEF5">
-
+                                                <td v-else-if="item.target =='TÀI SẢN'||item.target =='NGUỒN VỐN'">
                                                 </td>
-                                                <td v-bind:style="{ backgroundColor: item.color}" v-else>
-                                                    <template>
-                                                        <my-currency-input v-model="item.V1" v-bind:title="item.color" v-bind:likes="index"></my-currency-input>
-                                                    </template>
+                                                <td v-else>
+                                                    <center style="padding:2%" v-bind:style="{ backgroundColor: item.color}">
+                                                        <template>
+                                                            <my-currency-input v-model="item.V1" v-bind:title="item.color" v-bind:likes="index" v-bind:id_category="item.id_category"></my-currency-input>
+                                                        </template>
+                                                    </center>
                                                 </td>
-
-                                                <td style="text-align:right" v-bind:style="{ backgroundColor: item.color}" v-if="item.code == '500' || item.code == '120'|| item.code == '130' || item.code == '140'|| item.code == '150' || item.code == '160' || item.code == '180'|| item.code == '200'|| item.code == '300'|| item.code == '400'">
+                                                <td v-if="item.code == '500' || item.code == '120'|| item.code == '130' || item.code == '140'|| item.code == '150' || item.code == '160' || item.code == '180'|| item.code == '200'|| item.code == '300'|| item.code == '400'" style="text-align:right">
                                                     {{item.V0|VND}}
                                                 </td>
-                                                <td style="text-align:right;background-color:#EBEEF5" v-else>
+                                                <td v-else style="text-align:right">
                                                     {{item.V0|VND}}
                                                 </td>
-                                                <td v-bind:style="{ backgroundColor: item.color}" v-if="item.target =='TÀI SẢN' || item.target == 'NGUỒN VỐN'|| item.target == '1' || item.code == '500'|| item.code == '120'|| item.code == '130'|| item.code == '140'|| item.code == '150'|| item.code == '160'|| item.code == '180'|| item.code == '200'|| item.code == '300'|| item.code == '400'|| item.code == '500'">
+                                                <td v-if="item.target =='TÀI SẢN' || item.target == 'NGUỒN VỐN'|| item.target == '1' || item.code == '500'|| item.code == '120'|| item.code == '130'|| item.code == '140'|| item.code == '150'|| item.code == '160'|| item.code == '180'|| item.code == '200'|| item.code == '300'|| item.code == '400'|| item.code == '500'">
                                                 </td>
-                                                <td style="width:5%;background-color:#EBEEF5" v-else >
+                                                <td style="width:5%;" v-else>
                                                     <i v-bind:class="{ 'far fa-eye-slash': item.notSee , 'far fa-eye': item.watched}"></i>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="col-md-12" style="margin-top:2%">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <strong>NGƯỜI LẬP BIỂU</strong>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <i>(Ký, họ tên)</i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <strong>KẾ TOÁN TRƯỞNG</strong>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <i>(Ký, họ tên)</i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <span>Lập, ngày 21 tháng 12 năm 2021</span>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <strong>NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT</strong>
-
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <i>(Ký, họ tên, đóng dấu)</i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="myresult" class="img-zoom-result"></div>
+                            <div style="height:500px;overflow: scroll;">
+                                <div class="img-zoom-container">
+                                    <img id="myimage" src="https://www.daotaoketoanhcm.com/wp-content/uploads/2016/08/Huong-dan-lap-bang-can-doi-ke-toan.png" style="width:100%" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </el-tab-pane>
+                <el-tab-pane label="Báo cáo kết quả hoạt động kinh doanh" name="second">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12" style="">
+                                    <table style="width:92.2%;background-color:#c1c1c1;border:solid 1px">
+                                        <thead>
+                                            <tr style="font-weight:600">
+                                                <td style="width:38%">Chỉ tiêu</td>
+                                                <td style="width: 10.5%; text-align: center">Mã số</td>
+                                                <td style="width: 33%; text-align: center">Số cuối năm(V1)</td>
+                                                <td style="width: 30.5%; text-align: center">Số cuối năm đọc được(V0)</td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="col-md-12" style="height: 540px;overflow: scroll;">
+                                    <table class="infinite-list table-fixed">
+                                        <tbody>
+                                            <tr v-for="item in tableDataBusiness" v-if="item.code == '10' || item.code == '20'|| item.code == '30'
+                                                || item.code == '40'|| item.code == '50'|| item.code == '60'">
+                                                <td><div>{{item.target}}</div></td>
+                                                <td style="text-align:center"><div>{{item.code}}</div></td>
+                                                <td style="text-align:right"><div style="padding: 3%" v-bind:style="{ backgroundColor: item.color}">{{item.V1|VND}}</div></td>
+                                                <td style="text-align:right"><div>{{item.V0|VND}}</div></td>
+                                            </tr>
+                                            <tr style="background-color:#c1c1c1">
+                                                <td style="width:35%"></td>
+                                                <td style="width:10%;text-align:center"></td>
+                                                <td style="width:30%;text-align:center"></td>
+                                                <td style="width:15%;text-align:center"></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr v-for="(item,index) in tableDataBusiness" class="infinite-list-item">
+                                                <td style="">
+                                                    {{item.target}}
+                                                </td>
+                                                <td style="text-align:center">
+                                                    {{item.code}}
+                                                </td>
+                                                <td v-if="item.code =='10'|| item.code =='20'|| item.code =='30'|| item.code =='40'|| item.code =='50'|| item.code =='60'|| item.code == '(2)'" style="text-align:right">
+                                                    <div style="padding: 3%" v-bind:style="{ backgroundColor: item.color}">{{item.V1|VND}}</div>
+                                                </td>
+                                                <td v-else>
+                                                    <center style="padding: 3%" v-bind:style="{ backgroundColor: item.color}">
+                                                        <template>
+                                                            <my-currency-input v-model="item.V1" v-bind:title="item.color" v-bind:likes="index" v-bind:id_category="item.id_category"></my-currency-input>
+                                                        </template>
+                                                    </center>
+                                                </td>
+                                                <td style="text-align:right">
+                                                    {{item.V0|VND}}
+                                                </td>
+                                                <td v-if="item.code =='10'|| item.code =='20'|| item.code =='30'|| item.code =='40'|| item.code =='50'|| item.code =='60'">
+                                                </td>
+                                                <td style="width:5%" v-else>
+                                                    <i v-bind:class="{ 'far fa-eye-slash': item.notSee , 'far fa-eye': item.watched}"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <img src="https://www.daotaoketoanhcm.com/wp-content/uploads/2016/08/Huong-dan-lap-bang-can-doi-ke-toan.png" style="width:100%" />
+                            <div id="myresult" class="img-zoom-result"></div>
+                            <div style="height:500px;overflow: scroll;">
+                                <div class="img-zoom-container">
+                                    <img id="myimage" src="https://www.daotaoketoanhcm.com/wp-content/uploads/2016/08/Huong-dan-lap-bang-can-doi-ke-toan.png" style="width:100%" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </el-tab-pane>
-                <el-tab-pane label="Báo cáo kết quả hoạt động kinh doanh" name="second">Báo cáo kết quả hoạt động kinh doanh</el-tab-pane>
-                <el-tab-pane label="Báo cáo lưu chuyển tiền tệ" name="third">Báo cáo lưu chuyển tiền tệ</el-tab-pane>
+                <el-tab-pane label="Báo cáo lưu chuyển tiền tệ" name="third">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12" style="">
+                                    <table style="width:92.2%;background-color:#c1c1c1;border:solid 1px">
+                                        <thead>
+                                            <tr style="font-weight:600">
+                                                <td style="width:38%">Chỉ tiêu</td>
+                                                <td style="width: 10.5%; text-align: center">Mã số</td>
+                                                <td style="width: 33%; text-align: center">Số cuối năm(V1)</td>
+                                                <td style="width: 30.5%; text-align: center">Số cuối năm đọc được(V0)</td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="col-md-12" style="height: 540px;overflow: scroll;">
+                                    <table class="infinite-list table-fixed">
+                                        <tbody>
+                                            <tr v-for="item in tableDataCashFlow" v-if="item.code == '50' || item.code == '70'">
+                                                <td>{{item.target}}</td>
+                                                <td style="text-align:center">{{item.code}}</td>
+                                                <td style="text-align:right"><div style="padding:3%" v-bind:style="{ backgroundColor: item.color}">{{item.V1|VND}}</div></td>
+                                                <td style="text-align:right">{{item.V0|VND}}</td>
+                                            </tr>
+                                            <tr style="background-color:#c1c1c1">
+                                                <td style="width:35%"></td>
+                                                <td style="width:10%;text-align:center"></td>
+                                                <td style="width:30%;text-align:center"></td>
+                                                <td style="width:15%;text-align:center"></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr v-for="(item,index) in tableDataCashFlow" class="infinite-list-item">
+                                                <td v-if="item.target == 'I. Lưu chuyển tiền từ hoạt động kinh doanh'
+                                                    || item.target == 'II. Lưu chuyển tiền từ hoạt động đầu tư'
+                                                    || item.target == 'III. Lưu chuyển tiền từ hoạt động tài chính'
+                                                    || item.code == '20'
+                                                    || item.code == '30'
+                                                    || item.code == '40'
+                                                    || item.code == '50'
+                                                    || item.code == '60'
+                                                    || item.code == '61'
+                                                    || item.code == '70'" style="">
+                                                    <strong>{{item.target}}</strong>
+                                                </td>
+                                                <td v-else style="">
+                                                    {{item.target}}
+                                                </td>
+                                                <td v-if="item.code == '20'
+                                                    || item.code == '30'
+                                                    || item.code == '40'
+                                                    || item.code == '50'
+                                                    || item.code == '60'
+                                                    || item.code == '61'
+                                                    || item.code == '70'" style="text-align:center">
+                                                    <strong>{{item.code}}</strong>
+                                                </td>
+                                                <td v-else style="text-align:center">
+                                                    {{item.code}}
+                                                </td>
+                                                <td v-if="item.target == 'I. Lưu chuyển tiền từ hoạt động kinh doanh'
+                                                    || item.target == 'II. Lưu chuyển tiền từ hoạt động đầu tư'
+                                                    || item.target == 'III. Lưu chuyển tiền từ hoạt động tài chính'
+                                                    || item.code == '(2)'"></td>
+                                                <td v-else-if="item.code == '50' || item.code == '70'" style="text-align:right">
+                                                    <div style="padding: 3%" v-bind:style="{ backgroundColor: item.color}">{{item.V1|VND}}</div>
+                                                </td>
+                                                <td v-else>
+                                                    <center style="padding:3%" v-bind:style="{ backgroundColor: item.color}">
+                                                        <template>
+                                                            <my-currency-input v-model="item.V1" v-bind:title="item.color" v-bind:likes="index" v-bind:id_category="item.id_category"></my-currency-input>
+                                                        </template>
+                                                    </center>
+                                                </td>
+                                                <td style="text-align:right">
+                                                    {{item.V0|VND}}
+                                                </td>
+                                                <td v-if="item.target == 'I. Lưu chuyển tiền từ hoạt động kinh doanh'
+                                                    || item.target == 'II. Lưu chuyển tiền từ hoạt động đầu tư'
+                                                    || item.target == 'III. Lưu chuyển tiền từ hoạt động tài chính'">
+                                                </td>
+                                                <td style="width:5%" v-else>
+                                                    <i v-bind:class="{ 'far fa-eye-slash': item.notSee , 'far fa-eye': item.watched}"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="myresult" class="img-zoom-result"></div>
+                            <div style="height:500px;overflow: scroll;">
+                                <div class="img-zoom-container">
+                                    <img id="myimage" src="https://www.daotaoketoanhcm.com/wp-content/uploads/2016/08/Huong-dan-lap-bang-can-doi-ke-toan.png" style="width:100%" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </el-tab-pane>
                 @*<el-tab-pane label="Task" name="fourth">Task</el-tab-pane>*@
             </el-tabs>
         </template>
@@ -182,9 +312,9 @@
 </div>
 <script>
     Vue.component('my-currency-input', {
-        props: ['value','likes','title'],
+        props: ['value', 'likes', 'title','id_category'],
         template: `
-                    <input type="text" v-on:keyup="test()" contenteditable="true" v-model="displayValue" style="border:none;text-align:right;width:100%" v-bind:style="{ backgroundColor: this.title}" v-on:blur="isInputActive = false" v-on:focus="isInputActive = true"/>
+                    <input type="text" id="btnClick" v-on:keydown="eyes()" contenteditable="true" v-model="displayValue" style="border:none;text-align:right;width:100%" v-bind:style="{ backgroundColor: this.title}" v-on:blur="isInputActive = false" v-on:focus="isInputActive = true"/>
         `,
         data: function () {
             return {
@@ -192,12 +322,23 @@
             }
         },
         methods: {
-            test: function () {
+            eyes: function () {
                 //value.notSee = false;
-                    //value.watched = true;
-                var data = vm.tableData[this.likes];
-                data.notSee = false;
-                data.watched = true;
+                //value.watched = true;
+                if (this.id_category == 'accounting-133') {
+                    var data = vm.tableData[this.likes];
+                    data.notSee = false;
+                    data.watched = true;
+                }
+                else if (this.id_category == 'business-133') {
+                    var data = vm.tableDataBusiness[this.likes];
+                    data.notSee = false;
+                    data.watched = true;
+                } else {
+                    var data = vm.tableDataCashFlow[this.likes];
+                    data.notSee = false;
+                    data.watched = true;
+                }
             }
         },
         computed: {
@@ -205,7 +346,7 @@
                 get: function () {
                     if (this.isInputActive) {
                         // Cursor is inside the input field. unformat display value for user
-                        return this.value.toString()
+                        return this.value.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
                     } else {
                         // User is not modifying now. Format display value for user interface
                         return this.value.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
@@ -233,7 +374,7 @@
                 target: '(1)',
                 code: '(2)',
                 V1: '(3)',
-                color: '#EBEEF5',
+                color: '',
                 watched: false,
                 notSee: true,
                 V0: '(4)'
@@ -244,7 +385,8 @@
                 color: '',
                 watched: false,
                 notSee: true,
-                V0: ''
+                V0: '',
+                id_category: 'accounting-133'
             }, {
                 target: 'I. Tiền và các khoản tương đương tiền',
                 code: '110',
@@ -252,23 +394,26 @@
                 color: '#F56C6C',
                 watched: false,
                 notSee: true,
-                V0: '1090000'
+                    V0: '1090000',
+                    id_category: 'accounting-133'
             }, {
                 target: 'II. Đầu tư tài chính',
                 code: '120',
                 V1: '130025008',
-                    color: '#67C23A',
+                color: '#67C23A',
                 watched: false,
                 notSee: true,
-                    V0: '1901987'
+                    V0: '1901987',
+                    id_category: 'accounting-133'
             }, {
                 target: '1. Chứng khoán kinh doanh',
                 code: '121',
                 V1: '57300250',
-                    color: '#67C23A',
+                color: '#67C23A',
                 watched: false,
                 notSee: true,
-                V0: '3500000'
+                    V0: '3500000',
+                    id_category: 'accounting-133'
             },
             {
                 target: '2. Đầu tư nắm giữ đến ngày đáo hạn',
@@ -277,7 +422,8 @@
                 color: '',
                 watched: false,
                 notSee: true,
-                V0: '36500000'
+                V0: '36500000',
+                id_category: 'accounting-133'
             },
             {
                 target: '3. Đầu tư góp vốn vào đơn vị khác',
@@ -286,7 +432,8 @@
                 color: '#67C23A',
                 watched: false,
                 notSee: true,
-                V0: '10000000'
+                V0: '10000000',
+                id_category: 'accounting-133'
             },
             {
                 target: '4. Dự phòng tổn thất đầu tư tài chính (*)',
@@ -295,7 +442,8 @@
                 color: '#F56C6C',
                 watched: false,
                 notSee: true,
-                V0: '10000000'
+                V0: '10000000',
+                id_category: 'accounting-133'
             },
             {
                 target: 'III. Các khoản phải thu',
@@ -304,7 +452,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '10000000'
+                V0: '1851277524',
+                id_category: 'accounting-133'
             },
             {
                 target: '1. Phải thu của khách hàng',
@@ -313,7 +462,8 @@
                 color: '#67C23A',
                 watched: false,
                 notSee: true,
-                V0: '10000000'
+                V0: '10000000',
+                id_category: 'accounting-133'
             },
             {
                 target: '2. Trả trước cho người bán',
@@ -322,7 +472,8 @@
                 color: '',
                 watched: false,
                 notSee: true,
-                V0: '68200000'
+                V0: '68200000',
+                id_category: 'accounting-133'
             },
             {
                 target: '3. Vốn kinh doanh ở đơn vị trực thuộc',
@@ -331,7 +482,8 @@
                 color: '#67C23A',
                 watched: false,
                 notSee: true,
-                V0: '3002500'
+                V0: '3002500',
+                id_category: 'accounting-133'
             },
             {
                 target: '4. Phải thu khác',
@@ -340,7 +492,8 @@
                 color: '#67C23A',
                 watched: false,
                 notSee: true,
-                V0: '3002500'
+                V0: '3002500',
+                id_category: 'accounting-133'
             },
             {
                 target: '5. Tài sản thiếu chờ xử lý',
@@ -349,7 +502,8 @@
                 color: '',
                 watched: false,
                 notSee: true,
-                V0: '3002500'
+                V0: '3002500',
+                id_category: 'accounting-133'
             },
             {
                 target: '6. Dự phòng phải thu khó đòi (*)',
@@ -358,7 +512,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '3002500'
+                V0: '3002500',
+                id_category: 'accounting-133'
             },
             {
                 target: 'IV. Hàng tồn kho',
@@ -367,7 +522,8 @@
                 color: '#F56C6C',
                 watched: false,
                 notSee: true,
-                V0: '3600000'
+                V0: '3600000',
+                id_category: 'accounting-133'
             },
             {
                 target: '1. Hàng tồn kho',
@@ -376,7 +532,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '78888005'
+                V0: '78888005',
+                id_category: 'accounting-133'
             },
             {
                 target: '2. Dự phòng giảm giả hàng tồn kho (*)',
@@ -385,7 +542,8 @@
                 color: '#67C23A',
                 watched: false,
                 notSee: true,
-                V0: '780000'
+                V0: '780000',
+                id_category: 'accounting-133'
             },
             {
                 target: 'V. Tài sản cố định',
@@ -394,7 +552,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '900000'
+                V0: '900000',
+                id_category: 'accounting-133'
             },
             {
                 target: '– Nguyên giá',
@@ -403,7 +562,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '4500000'
+                V0: '4500000',
+                id_category: 'accounting-133'
             },
             {
                 target: '– Giá trị hao mòn lũy kế (*)',
@@ -412,7 +572,8 @@
                 color: '#67C23A',
                 watched: false,
                 notSee: true,
-                V0: '4500000'
+                V0: '4500000',
+                id_category: 'accounting-133'
             },
             {
                 target: 'VI. Bất động sản đầu tư',
@@ -421,7 +582,8 @@
                 color: '#67C23A',
                 watched: false,
                 notSee: true,
-                V0: '830000016'
+                V0: '830000016',
+                id_category: 'accounting-133'
             },
             {
                 target: '– Nguyên giá',
@@ -430,7 +592,8 @@
                 color: '#67C23A',
                 watched: false,
                 notSee: true,
-                V0: '4500000'
+                V0: '4500000',
+                id_category: 'accounting-133'
             },
             {
                 target: '– Giá trị hao mòn lũy kế (*)',
@@ -439,7 +602,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '78500000'
+                V0: '78500000',
+                id_category: 'accounting-133'
             },
             {
                 target: 'VII. XDCB dở dang',
@@ -448,7 +612,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '5500000'
+                V0: '5500000',
+                id_category: 'accounting-133'
             },
             {
                 target: 'VIII. Tài sản khác',
@@ -457,7 +622,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '550000055'
+                V0: '550000055',
+                id_category: 'accounting-133'
             },
             {
                 target: '1. Thuế GTGT được khấu trừ',
@@ -466,7 +632,8 @@
                 color: '#F56C6C',
                 watched: false,
                 notSee: true,
-                V0: '556666333'
+                V0: '556666333',
+                id_category: 'accounting-133'
             },
             {
                 target: '2. Tài sản khác',
@@ -475,16 +642,18 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '5000005'
+                V0: '5000005',
+                id_category: 'accounting-133'
             },
             {
                 target: 'TỔNG CỘNG TÀI SẢN(200 = 110 + 120 + 130 + 140 + 150 + 160 + 170 + 180)',
                 code: '200',
                 V1: '855300000',
-                color: '#EBEEF5',
+                color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '55300000'
+                V0: '55300000',
+                id_category: 'accounting-133'
             },
             {
                 target: 'NGUỒN VỐN',
@@ -493,7 +662,8 @@
                 color: '',
                 watched: '',
                 notSee: '',
-                V0: ''
+                V0: '',
+                id_category: 'accounting-133'
             },
             {
                 target: 'I. Nợ phải trả',
@@ -502,7 +672,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '55355555'
+                V0: '55355555',
+                id_category: 'accounting-133'
             },
             {
                 target: '1. Phải trả người bán',
@@ -511,7 +682,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '550000'
+                V0: '550000',
+                id_category: 'accounting-133'
             },
             {
                 target: '2. Người mua trả tiền trước',
@@ -520,7 +692,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '5550000'
+                V0: '5550000',
+                id_category: 'accounting-133'
             },
             {
                 target: '3. Thuế và các khoản phải nộp Nhà nước',
@@ -529,7 +702,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '550003'
+                V0: '550003',
+                id_category: 'accounting-133'
             },
             {
                 target: '4. Phải trả người lao động',
@@ -538,7 +712,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '500065'
+                V0: '500065',
+                id_category: 'accounting-133'
             },
             {
                 target: '5. Phải trả khác',
@@ -547,7 +722,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '550002566'
+                V0: '550002566',
+                id_category: 'accounting-133'
             },
             {
                 target: '6. Vay và nợ thuê tài chính',
@@ -556,7 +732,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '55660000'
+                V0: '55660000',
+                id_category: 'accounting-133'
             },
             {
                 target: '7. Phải trả nội bộ về vốn kinh doanh',
@@ -565,7 +742,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '552223333'
+                V0: '552223333',
+                id_category: 'accounting-133'
             },
             {
                 target: '8. Dự phòng phải trả',
@@ -574,7 +752,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '55200112'
+                V0: '55200112',
+                id_category: 'accounting-133'
             },
             {
                 target: '9. Quỹ khen thưởng, phúc lợi',
@@ -583,7 +762,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '550000'
+                V0: '550000',
+                id_category: 'accounting-133'
             },
             {
                 target: '10. Quỹ phát triển khoa học và công nghệ',
@@ -592,7 +772,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '550000'
+                V0: '550000',
+                id_category: 'accounting-133'
             },
             {
                 target: 'II. Vốn chủ sở hữu',
@@ -601,7 +782,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '550000'
+                V0: '550000',
+                id_category: 'accounting-133'
             },
             {
                 target: '1. Vốn góp của chủ sở hữu',
@@ -610,7 +792,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '5500000'
+                V0: '5500000',
+                id_category: 'accounting-133'
             },
             {
                 target: '2. Thặng dư vốn cổ phần',
@@ -619,7 +802,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '553333'
+                V0: '553333',
+                id_category: 'accounting-133'
             },
             {
                 target: '3. Vốn khác của chủ sở hữu',
@@ -628,7 +812,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '55555555'
+                V0: '55555555',
+                id_category: 'accounting-133'
             },
             {
                 target: '4. Cổ phiếu quỹ (*)',
@@ -637,7 +822,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '5599966'
+                V0: '5599966',
+                id_category: 'accounting-133'
             },
             {
                 target: '5. Chênh lệch tỷ giá hối đoái',
@@ -646,7 +832,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '555555'
+                V0: '555555',
+                id_category: 'accounting-133'
             },
             {
                 target: '6. Các quỹ thuộc vốn chủ sở hữu',
@@ -655,7 +842,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '5500000'
+                V0: '5500000',
+                id_category: 'accounting-133'
             },
             {
                 target: '7. Lợi nhuận sau thuế chưa phân phối',
@@ -664,7 +852,8 @@
                 color: '#E6A23C',
                 watched: false,
                 notSee: true,
-                V0: '5599966'
+                V0: '5599966',
+                id_category: 'accounting-133'
             },
             {
                 target: 'TỔNG CỘNG NGUỒN VỐN(500 = 300 + 400)',
@@ -673,15 +862,457 @@
                 color: '#EBEEF5',
                 watched: false,
                 notSee: false,
-                V0: '5599966'
-            }]
+                V0: '5599966',
+                id_category: 'accounting-133'
+            }],
+            tableDataBusiness: [{
+                target: '(1)',
+                code: '(2)',
+                V1: '(3)',
+                color: '',
+                watched: false,
+                notSee: true,
+                V0: '(4)'
+            }, {
+                target: '1. Doanh thu bán hàng và cung cấp dịch vụ',
+                code: '01',
+                V1: '30025008',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                    V0: '30025008',
+                    id_category: 'business-133'
+            }, {
+                target: '2. Các khoản giảm trừ doanh thu',
+                code: '02',
+                V1: '30025008',
+                color: '#F56C6C',
+                watched: false,
+                notSee: true,
+                    V0: '1090000',
+                    id_category: 'business-133'
+            }, {
+                target: '3. Doanh thu thuần về bán hàng và cung cấp dịch vụ (10= 01-02)',
+                code: '10',
+                V1: '130025008',
+                color: '#67C23A',
+                watched: false,
+                notSee: true,
+                    V0: '130025008',
+                    id_category: 'business-133'
+            }, {
+                target: '4. Giá vốn hàng bán',
+                code: '11',
+                V1: '57300250',
+                color: '#67C23A',
+                watched: false,
+                notSee: true,
+                    V0: '3500000',
+                    id_category: 'business-133'
+            },
+            {
+                target: '5. Lợi nhuận gộp về bán hàng và cung cấp dịch vụ (20=10-11)',
+                code: '20',
+                V1: '36500000',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '36500000',
+                id_category: 'business-133'
+            },
+            {
+                target: '6. Doanh thu hoạt động tài chính',
+                code: '21',
+                V1: '55589600',
+                color: '#67C23A',
+                watched: false,
+                notSee: true,
+                V0: '10000000',
+                id_category: 'business-133'
+            },
+            {
+                target: '7. Chi phí tài chính',
+                code: '22',
+                V1: '100000',
+                color: '#F56C6C',
+                watched: false,
+                notSee: true,
+                V0: '10000000',
+                id_category: 'business-133'
+            },
+            {
+                target: '- Trong đó: Chi phí lãi vay',
+                code: '23',
+                V1: '10000000',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '1851277524',
+                id_category: 'business-133'
+            },
+            {
+                target: '8. Chi phí quản lý kinh doanh',
+                code: '24',
+                V1: '810000000',
+                color: '#67C23A',
+                watched: false,
+                notSee: true,
+                V0: '10000000',
+                id_category: 'business-133'
+            },
+            {
+                target: '9. Lợi nhuận thuần từ hoạt động kinh doanh(30 = 20 + 21 - 22 - 24)',
+                code: '30',
+                V1: '68200000',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '68200000',
+                id_category: 'business-133'
+            },
+            {
+                target: '10. Thu nhập khác',
+                code: '31',
+                V1: '30025008',
+                color: '#67C23A',
+                watched: false,
+                notSee: true,
+                V0: '3002500',
+                id_category: 'business-133'
+            },
+            {
+                target: '11. Chi phí khác',
+                code: '32',
+                V1: '30025008',
+                color: '#67C23A',
+                watched: false,
+                notSee: true,
+                V0: '3002500',
+                id_category: 'business-133'
+            },
+            {
+                target: '12. Lợi nhuận khác (40 = 31 - 32)',
+                code: '40',
+                V1: '3002500',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '3002500',
+                id_category: 'business-133'
+            },
+            {
+                target: '13. Tổng lợi nhuận kế toán trước thuế (50 = 30 + 40)',
+                code: '50',
+                V1: '3002500',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '3002500',
+                id_category: 'business-133'
+            },
+            {
+                target: '14. Chi phí thuế TNDN',
+                code: '51',
+                V1: '36000008',
+                color: '#F56C6C',
+                watched: false,
+                notSee: true,
+                V0: '3600000',
+                id_category: 'business-133'
+            },
+            {
+                target: '15. Lợi nhuận sau thuế thu nhập doanh nghiệp(60 = 50 - 51)',
+                code: '60',
+                V1: '78888005',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '78888005',
+                id_category: 'business-133'
+            }],
+            tableDataCashFlow: [{
+                target: '(1)',
+                code: '(2)',
+                V1: '(3)',
+                color: '',
+                watched: false,
+                notSee: true,
+                V0: '(4)'
+            },
+            {
+                target: 'I. Lưu chuyển tiền từ hoạt động kinh doanh',
+                code: '',
+                V1: '',
+                color: '#EBEEF5',
+                watched: false,
+                notSee: true,
+                V0: '',
+                id_category: 'cash-133'
+            },
+            {
+                target: '1. Tiền thu từ bán hàng, cung cấp dịch vụ và doanh thu khác',
+                code: '01',
+                V1: '30025008',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '30025008',
+                id_category: 'cash-133'
+            }, {
+                target: '2. Tiền chi trả cho người cung cấp hàng hóa, dịch vụ',
+                code: '02',
+                V1: '30025008',
+                color: '#F56C6C',
+                watched: false,
+                notSee: true,
+                V0: '1090000',
+                id_category: 'cash-133'
+            }, {
+                target: '3. Tiền chi trả cho người lao động',
+                code: '03',
+                V1: '130025008',
+                color: '#67C23A',
+                watched: false,
+                notSee: true,
+                V0: '1901987',
+                id_category: 'cash-133'
+            }, {
+                target: '4. Tiền lãi vay đã trả',
+                code: '04',
+                V1: '57300250',
+                color: '#67C23A',
+                watched: false,
+                notSee: true,
+                V0: '3500000',
+                id_category: 'cash-133'
+            },
+            {
+                target: '5. Thuế thu nhập doanh nghiệp đã nộp',
+                code: '05',
+                V1: '30025',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '36500000',
+                id_category: 'cash-133'
+            },
+            {
+                target: '6. Tiền thu khác từ hoạt động kinh doanh',
+                code: '06',
+                V1: '55589600',
+                color: '#67C23A',
+                watched: false,
+                notSee: true,
+                V0: '10000000',
+                id_category: 'cash-133'
+            },
+            {
+                target: '7. Tiền chi khác cho hoạt động kinh doanh',
+                code: '07',
+                V1: '100000',
+                color: '#F56C6C',
+                watched: false,
+                notSee: true,
+                V0: '10000000',
+                id_category: 'cash-133'
+            },
+            {
+                target: 'Lưu chuyển tiền thuần từ hoạt động kinh doanh',
+                code: '20',
+                V1: '10000000',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '1851277524',
+                id_category: 'cash-133'
+            },
+            {
+                target: 'II. Lưu chuyển tiền từ hoạt động đầu tư',
+                code: '',
+                V1: '',
+                color: '#67C23A',
+                watched: false,
+                notSee: true,
+                V0: '',
+                id_category: 'cash-133'
+            },
+            {
+                target: '1. Tiền chi để mua sắm, xây dựng TSCĐ, BĐSĐT và các tài sản dài hạn khác',
+                code: '21',
+                V1: '868200000',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '68200000',
+                id_category: 'cash-133'
+            },
+            {
+                target: '2. Tiền thu từ thanh lý, nhượng bán TSCĐ, BĐSĐT và các tài sản dài hạn khác',
+                code: '22',
+                V1: '30025008',
+                color: '#67C23A',
+                watched: false,
+                notSee: true,
+                V0: '3002500',
+                id_category: 'cash-133'
+            },
+            {
+                target: '3. Tiền chi cho vay, đầu tư góp vốn vào đơn vị khác',
+                code: '23',
+                V1: '30025008',
+                color: '#67C23A',
+                watched: false,
+                notSee: true,
+                V0: '3002500',
+                id_category: 'cash-133'
+            },
+            {
+                target: '4. Tiền thu hồi cho vay, đầu tư góp vốn vào đơn vị khác',
+                code: '24',
+                V1: '83002500',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '3002500',
+                id_category: 'cash-133'
+            },
+            {
+                target: '5. Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia',
+                code: '25',
+                V1: '30025008',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '3002500',
+                id_category: 'cash-133'
+            },
+            {
+                target: 'Lưu chuyển tiền thuần từ hoạt động đầu tư',
+                code: '30',
+                V1: '36000008',
+                color: '#F56C6C',
+                watched: false,
+                notSee: true,
+                V0: '3600000',
+                id_category: 'cash-133'
+            },
+            {
+                target: 'III. Lưu chuyển tiền từ hoạt động tài chính',
+                code: '',
+                V1: '',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '',
+                id_category: 'cash-133'
+            },
+            {
+                target: '1. Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu',
+                code: '31',
+                V1: '788880058',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '78888005',
+                id_category: 'cash-133'
+            },
+            {
+                target: '2. Tiền trả lại vốn góp cho các chủ sở hữu, mua lại cổ phiếu của doanh nghiệp đã phát hành',
+                code: '32',
+                V1: '788880058',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '78888005',
+                id_category: 'cash-133'
+            },
+            {
+                target: '3. Tiền thu từ đi vay',
+                code: '33',
+                V1: '788880058',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '78888005',
+                id_category: 'cash-133'
+            },
+            {
+                target: '4. Tiền trả nợ gốc vay và nợ thuê tài chính',
+                code: '34',
+                V1: '788880058',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '78888005',
+                id_category: 'cash-133'
+            },
+            {
+                target: '5. Cổ tức, lợi nhuận đã trả cho chủ sở hữu',
+                code: '35',
+                V1: '788880058',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '78888005',
+                id_category: 'cash-133'
+            },
+            {
+                target: 'Lưu chuyển tiền thuần từ hoạt động tài chính',
+                code: '40',
+                V1: '788880058',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '78888005',
+                id_category: 'cash-133'
+            },
+            {
+                target: 'Lưu chuyển tiền thuần trong kỳ (50 = 20+30+40)',
+                code: '50',
+                V1: '788880058',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '788880058',
+                id_category: 'cash-133'
+            },
+            {
+                target: 'Tiền và tương đương tiền đầu kỳ',
+                code: '60',
+                V1: '788880058',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '78888005',
+                id_category: 'cash-133'
+            },
+            {
+                target: 'Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ',
+                code: '61',
+                V1: '788880058',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '78888005',
+                id_category: 'cash-133'
+            },
+            {
+                target: 'Tiền và tương đương tiền cuối kỳ(70 = 50 + 60 + 61)',
+                code: '70',
+                V1: '788880058',
+                color: '#E6A23C',
+                watched: false,
+                notSee: true,
+                V0: '788880058',
+                id_category: 'cash-133'
+            }],
         },
         methods: {
             handleClick(tab, event) {
                 console.log(tab, event);
             },
-            test: function (index) {
-                debugger
+            load() {
+                this.count += 2
             }
         },
 
@@ -691,6 +1322,7 @@
             }
         },
         created: function () {
+            // BÁo cáo cân đối kế toán
             let code120 = -1, code121, code122, code123, code124, code130, code131, code132, code133,
                 code134, code135, code136, code140, code141, code142, code150, code151, code152, code160, code161, code162
                 , code180, code181, code182, code200, code311, code312, code313, code314, code315, code316, code317
@@ -904,252 +1536,207 @@
             // màu đỏ : #F56C6C
             // màu vàng :  #E6A23C
             //màu xanh : #67C23A
-            let count2 = 0, count3 = 0, count4 = 0, count5 = 0, count6 = 0, count8 = 0, count20 = 0, count30 = 0, count40 = 0, count50 = 0;
             for (var i = 0; i < this.tableData.length; i++) {
-                if (this.tableData[i].code == '120') {
-                    code120 = i;
+                if (this.tableData[i].code == '120' && this.tableData[i].V1 == this.tableData[i].V0) {
+                    this.tableData[i].color = '#67C23A';
                 }
-                if (this.tableData[i].code == '121' || this.tableData[i].code == '122' || this.tableData[i].code == '123' || this.tableData[i].code == '124') {
-                    if (this.tableData[i].color == '#F56C6C' || this.tableData[i].color == '#E6A23C') {
-                        count2++;
-                    }
+                else if (this.tableData[i].code == '130' && this.tableData[i].V1 == this.tableData[i].V0) {
+                    this.tableData[i].color = '#67C23A';
                 }
-
-                if (this.tableData[i].code == '130') {
-                    code130 = i;
+                else if (this.tableData[i].code == '140' && this.tableData[i].V1 == this.tableData[i].V0) {
+                    this.tableData[i].color = '#67C23A';
                 }
-                if (this.tableData[i].code == '131' || this.tableData[i].code == '132' || this.tableData[i].code == '133' || this.tableData[i].code == '134'
-                    || this.tableData[i].code == '135' || this.tableData[i].code == '136') {
-                    if (this.tableData[i].color == '#F56C6C' || this.tableData[i].color == '#E6A23C') {
-                        count3++;
-                    }
+                else if (this.tableData[i].code == '150' && this.tableData[i].V1 == this.tableData[i].V0) {
+                    this.tableData[i].color = '#67C23A';
                 }
-
-                if (this.tableData[i].code == '140') {
-                    code140 = i;
+                else if (this.tableData[i].code == '160' && this.tableData[i].V1 == this.tableData[i].V0) {
+                    this.tableData[i].color = '#67C23A';
                 }
-                if (this.tableData[i].code == '141' || this.tableData[i].code == '142') {
-                    if (this.tableData[i].color == '#F56C6C' || this.tableData[i].color == '#E6A23C') {
-                        count4++;
-                    }
+                else if (this.tableData[i].code == '180' && this.tableData[i].V1 == this.tableData[i].V0) {
+                    this.tableData[i].color = '#67C23A';
                 }
-
-                if (this.tableData[i].code == '150') {
-                    code150 = i;
+                else if (this.tableData[i].code == '300' && this.tableData[i].V1 == this.tableData[i].V0) {
+                    this.tableData[i].color = '#67C23A';
                 }
-                if (this.tableData[i].code == '151' || this.tableData[i].code == '152') {
-                    if (this.tableData[i].color == '#F56C6C' || this.tableData[i].color == '#E6A23C') {
-                        count5++;
-                    }
+                else if (this.tableData[i].code == '400' && this.tableData[i].V1 == this.tableData[i].V0) {
+                    this.tableData[i].color = '#67C23A';
                 }
-
-                if (this.tableData[i].code == '160') {
-                    code160 = i;
+                else if (this.tableData[i].code == '500' && this.tableData[i].V1 == this.tableData[i].V0) {
+                    this.tableData[i].color = '#67C23A';
                 }
-                if (this.tableData[i].code == '161' || this.tableData[i].code == '162') {
-                    if (this.tableData[i].color == '#F56C6C' || this.tableData[i].color == '#E6A23C') {
-                        count6++;
-                    }
+                //khác----------------
+                else if (this.tableData[i].code == '120' && this.tableData[i].V1 != this.tableData[i].V0) {
+                    this.tableData[i].color = '#F56C6C';
                 }
-
-                if (this.tableData[i].code == '180') {
-                    code180 = i;
+                else if (this.tableData[i].code == '130' && this.tableData[i].V1 != this.tableData[i].V0) {
+                    this.tableData[i].color = '#F56C6C';
                 }
-                if (this.tableData[i].code == '181' || this.tableData[i].code == '182') {
-                    if (this.tableData[i].color == '#F56C6C' || this.tableData[i].color == '#E6A23C') {
-                        count8++;
-                    }
+                else if (this.tableData[i].code == '140' && this.tableData[i].V1 != this.tableData[i].V0) {
+                    this.tableData[i].color = '#F56C6C';
                 }
-
-                if (this.tableData[i].code == '300') {
-                    code300 = i;
+                else if (this.tableData[i].code == '150' && this.tableData[i].V1 != this.tableData[i].V0) {
+                    this.tableData[i].color = '#F56C6C';
                 }
-                if (this.tableData[i].code == '311' || this.tableData[i].code == '312' || this.tableData[i].code == '313'
-                    || this.tableData[i].code == '314' || this.tableData[i].code == '315' || this.tableData[i].code == '316'
-                    || this.tableData[i].code == '317' || this.tableData[i].code == '318' || this.tableData[i].code == '319'
-                    || this.tableData[i].code == '320') {
-                    if (this.tableData[i].color == '#F56C6C' || this.tableData[i].color == '#E6A23C') {
-                        count30++;
-                    }
+                else if (this.tableData[i].code == '160' && this.tableData[i].V1 != this.tableData[i].V0) {
+                    this.tableData[i].color = '#F56C6C';
                 }
-
-                if (this.tableData[i].code == '400') {
-                    code400 = i;
+                else if (this.tableData[i].code == '180' && this.tableData[i].V1 != this.tableData[i].V0) {
+                    this.tableData[i].color = '#F56C6C';
                 }
-                if (this.tableData[i].code == '411' || this.tableData[i].code == '412' || this.tableData[i].code == '413'
-                    || this.tableData[i].code == '414' || this.tableData[i].code == '415' || this.tableData[i].code == '416'
-                    || this.tableData[i].code == '417') {
-                    if (this.tableData[i].color == '#F56C6C' || this.tableData[i].color == '#E6A23C') {
-                        count40++;
-                    }
+                else if (this.tableData[i].code == '300' && this.tableData[i].V1 != this.tableData[i].V0) {
+                    this.tableData[i].color = '#F56C6C';
                 }
-
+                else if (this.tableData[i].code == '400' && this.tableData[i].V1 != this.tableData[i].V0) {
+                    this.tableData[i].color = '#F56C6C';
+                }
+                else if (this.tableData[i].code == '500' && this.tableData[i].V1 != this.tableData[i].V0) {
+                    this.tableData[i].color = '#F56C6C';
+                }
             }
 
-            if (count2 == 0) {
-                this.tableData[code120].color = '#67C23A';
-            }
-            else if (count2 < 2 && code120 > -1) {
-                if (this.tableData[code120].color == '#F56C6C' || this.tableData[code120].color == '#E6A23C') {
-                    this.tableData[code120].color = '#F56C6C';
+            // Báo cáo kết quả hoạt động kinh doanh-------------------------------
+            let bCode01, bCode02, bCode11, bCode21, bCode22, bCode23, bCode24, bCode31, bCode32, bCode51, bCode10, bCode20, bCode30, bCode40, bCode50, bCode60;
+            for (var i = 0; i < this.tableDataBusiness.length; i++) {
+                if (this.tableDataBusiness[i].code == "01") {
+                    bCode01 = this.tableDataBusiness[i].V1;
                 }
-                else {
-                    if (this.tableData[code120].V1 == this.tableData[code120].V0) {
-                        this.tableData[code120].color = '#67C23A';
+                else if (this.tableDataBusiness[i].code == "02") {
+                    bCode02 = this.tableDataBusiness[i].V1;
+                }
+                else if (this.tableDataBusiness[i].code == "10") {
+                    this.tableDataBusiness[i].V1 = Number(bCode01) - Number(bCode02);
+                    bCode10 = Number(bCode01) - Number(bCode02);
+                    if (this.tableDataBusiness[i].V1 == this.tableDataBusiness[i].V0) {
+                        this.tableDataBusiness[i].color = "#67C23A";
                     }
                     else {
-                        this.tableData[code120].color = '#F56C6C';
+                        this.tableDataBusiness[i].color = "#F56C6C";
+
                     }
                 }
-            }
-            else if (count2 > 1 && code120 > -1) {
-                this.tableData[code120].color = '#F56C6C';
-            }
-
-            if (count3 == 0) {
-                this.tableData[code130].color = '#67C23A';
-            }
-            else if (count3 < 2 && code130 > -1) {
-                if (this.tableData[code130].color == '#F56C6C' || this.tableData[code130].color == '#E6A23C') {
-                    this.tableData[code130].color = '#F56C6C';
+                else if (this.tableDataBusiness[i].code == "11") {
+                    bCode11 = this.tableDataBusiness[i].V1;
                 }
-                else {
-                    if (this.tableData[code130].V1 == this.tableData[code130].V0) {
-                        this.tableData[code130].color = '#67C23A';
+                else if (this.tableDataBusiness[i].code == "20") {
+                    this.tableDataBusiness[i].V1 = Number(bCode10) - Number(bCode11);
+                    bCode20 = this.tableDataBusiness[i].V1;
+                    if (this.tableDataBusiness[i].V1 == this.tableDataBusiness[i].V0) {
+                        this.tableDataBusiness[i].color = "#67C23A";
                     }
                     else {
-                        this.tableData[code130].color = '#F56C6C';
+                        this.tableDataBusiness[i].color = "#F56C6C";
+
                     }
                 }
-            }
-            else if (count3 > 1 && code130 > -1) {
-                this.tableData[code130].color = '#F56C6C';
-            }
-
-            if (count4 == 0) {
-                this.tableData[code140].color = '#67C23A';
-            }
-            else if (count4 < 2 && code140 > -1) {
-                if (this.tableData[code140].color == '#F56C6C' || this.tableData[code140].color == '#E6A23C') {
-                    this.tableData[code140].color = '#F56C6C';
+                else if (this.tableDataBusiness[i].code == "21") {
+                    bCode21 = this.tableDataBusiness[i].V1;
                 }
-                else {
-                    if (this.tableData[code140].V1 == this.tableData[code140].V0) {
-                        this.tableData[code140].color = '#67C23A';
+                else if (this.tableDataBusiness[i].code == "22") {
+                    bCode22 = this.tableDataBusiness[i].V1;
+                }
+                else if (this.tableDataBusiness[i].code == "23") {
+                    bCode23 = this.tableDataBusiness[i].V1;
+                }
+                else if (this.tableDataBusiness[i].code == "24") {
+                    bCode24 = this.tableDataBusiness[i].V1;
+                }
+                else if (this.tableDataBusiness[i].code == "30") {
+                    this.tableDataBusiness[i].V1 = Number(bCode20) + Number(bCode21) - Number(bCode22) - Number(bCode23) - Number(bCode24);
+                    bCode30 = this.tableDataBusiness[i].V1;
+                    if (this.tableDataBusiness[i].V1 == this.tableDataBusiness[i].V0) {
+                        this.tableDataBusiness[i].color = "#67C23A";
                     }
                     else {
-                        this.tableData[code140].color = '#F56C6C';
+                        this.tableDataBusiness[i].color = "#F56C6C";
+
                     }
                 }
-            }
-            else if (count4 > 1 && code140 > -1) {
-                this.tableData[code140].color = '#F56C6C';
-            }
-
-            if (count5 == 0) {
-                this.tableData[code150].color = '#67C23A';
-            }
-            else if (count5 < 2 && code150 > -1) {
-                if (this.tableData[code150].color == '#F56C6C' || this.tableData[code150].color == '#E6A23C') {
-                    this.tableData[code150].color = '#F56C6C';
+                else if (this.tableDataBusiness[i].code == "31") {
+                    bCode31 = this.tableDataBusiness[i].V1;
                 }
-                else {
-                    if (this.tableData[code150].V1 == this.tableData[code150].V0) {
-                        this.tableData[code150].color = '#67C23A';
+                else if (this.tableDataBusiness[i].code == "32") {
+                    bCode32 = this.tableDataBusiness[i].V1;
+                }
+                else if (this.tableDataBusiness[i].code == "40") {
+                    this.tableDataBusiness[i].V1 = Number(bCode31) - Number(bCode32);
+                    bCode40 = this.tableDataBusiness[i].V1;
+                    if (this.tableDataBusiness[i].V1 == this.tableDataBusiness[i].V0) {
+                        this.tableDataBusiness[i].color = "#67C23A";
                     }
                     else {
-                        this.tableData[code150].color = '#F56C6C';
-                    }
-                }
-            }
-            else if (count5 > 1 && code150 > -1) {
-                this.tableData[code150].color = '#F56C6C';
-            }
+                        this.tableDataBusiness[i].color = "#F56C6C";
 
-            if (count6 == 0) {
-                this.tableData[code160].color = '#67C23A';
-            }
-            else if (count6 < 2 && code160 > -1) {
-                if (this.tableData[code160].color == '#F56C6C' || this.tableData[code160].color == '#E6A23C') {
-                    this.tableData[code160].color = '#F56C6C';
+                    }
+
                 }
-                else {
-                    if (this.tableData[code160].V1 == this.tableData[code160].V0) {
-                        this.tableData[code160].color = '#67C23A';
+                else if (this.tableDataBusiness[i].code == "50") {
+                    this.tableDataBusiness[i].V1 = Number(bCode30) + Number(bCode40);
+                    bCode50 = this.tableDataBusiness[i].V1;
+                    if (this.tableDataBusiness[i].V1 == this.tableDataBusiness[i].V0) {
+                        this.tableDataBusiness[i].color = "#67C23A";
                     }
                     else {
-                        this.tableData[code160].color = '#F56C6C';
+                        this.tableDataBusiness[i].color = "#F56C6C";
+
                     }
                 }
-            }
-            else if (count6 > 1 && code160 > -1) {
-                this.tableData[code160].color = '#F56C6C';
-            }
-
-            if (count8 == 0) {
-                this.tableData[code180].color = '#67C23A';
-            }
-            else if (count8 < 2 && code180 > -1) {
-                if (this.tableData[code180].color == '#F56C6C' || this.tableData[code180].color == '#E6A23C') {
-                    this.tableData[code180].color = '#F56C6C';
+                else if (this.tableDataBusiness[i].code == "51") {
+                    bCode51 = this.tableDataBusiness[i].V1;
                 }
-                else {
-                    if (this.tableData[code180].V1 == this.tableData[code180].V0) {
-                        this.tableData[code180].color = '#67C23A';
+                else if (this.tableDataBusiness[i].code == "60") {
+                    this.tableDataBusiness[i].V1 = Number(bCode50) - Number(bCode51);
+                    if (this.tableDataBusiness[i].V1 == this.tableDataBusiness[i].V0) {
+                        this.tableDataBusiness[i].color = "#67C23A";
                     }
                     else {
-                        this.tableData[code180].color = '#F56C6C';
-                    }
-                }
-            }
-            else if (count8 > 1 && code180 > -1) {
-                this.tableData[code180].color = '#F56C6C';
-            }
+                        this.tableDataBusiness[i].color = "#F56C6C";
 
-            if (count30 == 0) {
-                this.tableData[code300].color = '#67C23A';
-            }
-            else if (count30 < 2 && code300 > -1) {
-                if (this.tableData[code300].color == '#F56C6C' || this.tableData[code300].color == '#E6A23C') {
-                    this.tableData[code300].color = '#F56C6C';
-                }
-                else {
-                    if (this.tableData[code300].V1 == this.tableData[code300].V0) {
-                        this.tableData[code300].color = '#67C23A';
-                    }
-                    else {
-                        this.tableData[code300].color = '#F56C6C';
                     }
                 }
             }
-            else if (count30 > 1 && code300 > -1) {
-                this.tableData[code300].color = '#F56C6C';
-            }
+            // Báo cáo lưu chuyển tiền tệ ------------------------------------------
+            let cfCode20, cfCode30, cfCode40, cfCode50, cfCode60, cfCode61, cfCode70;
+            for (var i = 0; this.tableDataCashFlow.length; i++) {
+                if (this.tableDataCashFlow[i].code == '20') {
+                    cfCode20 = this.tableDataCashFlow[i].V1;
+                }
+                else if (this.tableDataCashFlow[i].code == '30') {
+                    cfCode30 = this.tableDataCashFlow[i].V1;
 
-            if (count40 == 0) {
-                this.tableData[code400].color = '#67C23A';
-            }
-            else if (count40 < 2 && code400 > -1) {
-                if (this.tableData[code400].color == '#F56C6C' || this.tableData[code400].color == '#E6A23C') {
-                    this.tableData[code400].color = '#F56C6C';
                 }
-                else {
-                    if (this.tableData[code400].V1 == this.tableData[code400].V0) {
-                        this.tableData[code400].color = '#67C23A';
-                    }
-                    else {
-                        this.tableData[code400].color = '#F56C6C';
+                else if (this.tableDataCashFlow[i].code == '40') {
+                    cfCode40 = this.tableDataCashFlow[i].V1;
+                }
+                else if (this.tableDataCashFlow[i].code == '60') {
+                    cfCode60 = this.tableDataCashFlow[i].V1;
+                }
+                else if (this.tableDataCashFlow[i].code == '61') {
+                    cfCode61 = this.tableDataCashFlow[i].V1;
+                }
+                else if (this.tableDataCashFlow[i].code == '50') {
+
+                    this.tableDataCashFlow[i].V1 = Number(cfCode20) + Number(cfCode30) + Number(cfCode40);
+                    cfCode50 = this.tableDataCashFlow[i].V1;
+                    if (this.tableDataCashFlow[i].V1 == this.tableDataCashFlow[i].V0) {
+                        this.tableDataCashFlow[i].color = '#67C23A';
+                    } else {
+                        this.tableDataCashFlow[i].color = '#F56C6C';
                     }
                 }
-            }
-            else if (count40 > 1 && code400 > -1) {
-                this.tableData[code400].color = '#F56C6C';
+                else if (this.tableDataCashFlow[i].code == '70') {
+                    this.tableDataCashFlow[i].V1 = Number(cfCode50) + Number(cfCode60) + Number(cfCode61);
+                    if (this.tableDataCashFlow[i].V1 == this.tableDataCashFlow[i].V0) {
+                        this.tableDataCashFlow[i].color = '#67C23A';
+                    } else {
+                        this.tableDataCashFlow[i].color = '#F56C6C';
+                    }
+                }
             }
         },
         watch: {
             tableData: {
                 handler: function () {
-                    
+                    //  Báo cáo cân đối kế toán
                     for (var i = 0; i < vm.tableData.length; i++) {
                         if (vm.tableData[i].code == '120') {
                             let code121, code122, code123, code124;
@@ -1345,6 +1932,212 @@
                                 }
                             }
                             vm.tableData[i].V1 = Number(code300) + Number(code400);
+                        }
+                    }
+                    //Tính tổng -------------------------------------
+                    for (var i = 0; i < this.tableData.length; i++) {
+                        if (this.tableData[i].code == '120' && this.tableData[i].V1 == this.tableData[i].V0) {
+                            this.tableData[i].color = '#67C23A';
+                        }
+                        else if (this.tableData[i].code == '130' && this.tableData[i].V1 == this.tableData[i].V0) {
+                            this.tableData[i].color = '#67C23A';
+                        }
+                        else if (this.tableData[i].code == '140' && this.tableData[i].V1 == this.tableData[i].V0) {
+                            this.tableData[i].color = '#67C23A';
+                        }
+                        else if (this.tableData[i].code == '150' && this.tableData[i].V1 == this.tableData[i].V0) {
+                            this.tableData[i].color = '#67C23A';
+                        }
+                        else if (this.tableData[i].code == '160' && this.tableData[i].V1 == this.tableData[i].V0) {
+                            this.tableData[i].color = '#67C23A';
+                        }
+                        else if (this.tableData[i].code == '180' && this.tableData[i].V1 == this.tableData[i].V0) {
+                            this.tableData[i].color = '#67C23A';
+                        }
+                        else if (this.tableData[i].code == '300' && this.tableData[i].V1 == this.tableData[i].V0) {
+                            this.tableData[i].color = '#67C23A';
+                        }
+                        else if (this.tableData[i].code == '400' && this.tableData[i].V1 == this.tableData[i].V0) {
+                            this.tableData[i].color = '#67C23A';
+                        }
+                        else if (this.tableData[i].code == '500' && this.tableData[i].V1 == this.tableData[i].V0) {
+                            this.tableData[i].color = '#67C23A';
+                        }
+                        //khác----------------
+                        else if (this.tableData[i].code == '120' && this.tableData[i].V1 != this.tableData[i].V0) {
+                            this.tableData[i].color = '#F56C6C';
+                        }
+                        else if (this.tableData[i].code == '130' && this.tableData[i].V1 != this.tableData[i].V0) {
+                            this.tableData[i].color = '#F56C6C';
+                        }
+                        else if (this.tableData[i].code == '140' && this.tableData[i].V1 != this.tableData[i].V0) {
+                            this.tableData[i].color = '#F56C6C';
+                        }
+                        else if (this.tableData[i].code == '150' && this.tableData[i].V1 != this.tableData[i].V0) {
+                            this.tableData[i].color = '#F56C6C';
+                        }
+                        else if (this.tableData[i].code == '160' && this.tableData[i].V1 != this.tableData[i].V0) {
+                            this.tableData[i].color = '#F56C6C';
+                        }
+                        else if (this.tableData[i].code == '180' && this.tableData[i].V1 != this.tableData[i].V0) {
+                            this.tableData[i].color = '#F56C6C';
+                        }
+                        else if (this.tableData[i].code == '300' && this.tableData[i].V1 != this.tableData[i].V0) {
+                            this.tableData[i].color = '#F56C6C';
+                        }
+                        else if (this.tableData[i].code == '400' && this.tableData[i].V1 != this.tableData[i].V0) {
+                            this.tableData[i].color = '#F56C6C';
+                        }
+                        else if (this.tableData[i].code == '500' && this.tableData[i].V1 != this.tableData[i].V0) {
+                            this.tableData[i].color = '#F56C6C';
+                        }
+                    }
+                },
+                deep: true
+            },
+            tableDataBusiness: {
+                handler: function () {
+                    let bCode01, bCode02, bCode11, bCode21, bCode22, bCode23, bCode24, bCode31, bCode32, bCode51, bCode10, bCode20, bCode30, bCode40, bCode50, bCode60;
+                    for (var i = 0; i < this.tableDataBusiness.length; i++) {
+                        if (this.tableDataBusiness[i].code == "01") {
+                            bCode01 = this.tableDataBusiness[i].V1;
+                        }
+                        else if (this.tableDataBusiness[i].code == "02") {
+                            bCode02 = this.tableDataBusiness[i].V1;
+                        }
+                        else if (this.tableDataBusiness[i].code == "10") {
+                            this.tableDataBusiness[i].V1 = Number(bCode01) - Number(bCode02);
+                            bCode10 = Number(bCode01) - Number(bCode02);
+                            if (this.tableDataBusiness[i].V1 == this.tableDataBusiness[i].V0) {
+                                this.tableDataBusiness[i].color = "#67C23A";
+                            }
+                            else {
+                                this.tableDataBusiness[i].color = "#F56C6C";
+
+                            }
+                        }
+                        else if (this.tableDataBusiness[i].code == "11") {
+                            bCode11 = this.tableDataBusiness[i].V1;
+                        }
+                        else if (this.tableDataBusiness[i].code == "20") {
+                            this.tableDataBusiness[i].V1 = Number(bCode10) - Number(bCode11);
+                            bCode20 = this.tableDataBusiness[i].V1;
+                            if (this.tableDataBusiness[i].V1 == this.tableDataBusiness[i].V0) {
+                                this.tableDataBusiness[i].color = "#67C23A";
+                            }
+                            else {
+                                this.tableDataBusiness[i].color = "#F56C6C";
+
+                            }
+                        }
+                        else if (this.tableDataBusiness[i].code == "21") {
+                            bCode21 = this.tableDataBusiness[i].V1;
+                        }
+                        else if (this.tableDataBusiness[i].code == "22") {
+                            bCode22 = this.tableDataBusiness[i].V1;
+                        }
+                        else if (this.tableDataBusiness[i].code == "23") {
+                            bCode23 = this.tableDataBusiness[i].V1;
+                        }
+                        else if (this.tableDataBusiness[i].code == "24") {
+                            bCode24 = this.tableDataBusiness[i].V1;
+                        }
+                        else if (this.tableDataBusiness[i].code == "30") {
+                            this.tableDataBusiness[i].V1 = Number(bCode20) + Number(bCode21) - Number(bCode22) - Number(bCode23) - Number(bCode24);
+                            bCode30 = this.tableDataBusiness[i].V1;
+                            if (this.tableDataBusiness[i].V1 == this.tableDataBusiness[i].V0) {
+                                this.tableDataBusiness[i].color = "#67C23A";
+                            }
+                            else {
+                                this.tableDataBusiness[i].color = "#F56C6C";
+
+                            }
+                        }
+                        else if (this.tableDataBusiness[i].code == "31") {
+                            bCode31 = this.tableDataBusiness[i].V1;
+                        }
+                        else if (this.tableDataBusiness[i].code == "32") {
+                            bCode32 = this.tableDataBusiness[i].V1;
+                        }
+                        else if (this.tableDataBusiness[i].code == "40") {
+                            this.tableDataBusiness[i].V1 = Number(bCode31) - Number(bCode32);
+                            bCode40 = this.tableDataBusiness[i].V1;
+                            if (this.tableDataBusiness[i].V1 == this.tableDataBusiness[i].V0) {
+                                this.tableDataBusiness[i].color = "#67C23A";
+                            }
+                            else {
+                                this.tableDataBusiness[i].color = "#F56C6C";
+
+                            }
+
+                        }
+                        else if (this.tableDataBusiness[i].code == "50") {
+                            this.tableDataBusiness[i].V1 = Number(bCode30) + Number(bCode40);
+                            bCode50 = this.tableDataBusiness[i].V1;
+                            if (this.tableDataBusiness[i].V1 == this.tableDataBusiness[i].V0) {
+                                this.tableDataBusiness[i].color = "#67C23A";
+                            }
+                            else {
+                                this.tableDataBusiness[i].color = "#F56C6C";
+
+                            }
+                        }
+                        else if (this.tableDataBusiness[i].code == "51") {
+                            bCode51 = this.tableDataBusiness[i].V1;
+                        }
+                        else if (this.tableDataBusiness[i].code == "60") {
+                            this.tableDataBusiness[i].V1 = Number(bCode50) - Number(bCode51);
+                            if (this.tableDataBusiness[i].V1 == this.tableDataBusiness[i].V0) {
+                                this.tableDataBusiness[i].color = "#67C23A";
+                            }
+                            else {
+                                this.tableDataBusiness[i].color = "#F56C6C";
+
+                            }
+                        }
+                    }
+
+                },
+                deep: true
+            },
+            tableDataCashFlow: {
+                handler: function () {
+                    // Báo cáo lưu chuyển tiền tệ ------------------------------------------
+                    let cfCode20, cfCode30, cfCode40, cfCode50, cfCode60, cfCode61, cfCode70;
+                    for (var i = 0; this.tableDataCashFlow.length; i++) {
+                        if (this.tableDataCashFlow[i].code == '20') {
+                            cfCode20 = this.tableDataCashFlow[i].V1;
+                        }
+                        else if (this.tableDataCashFlow[i].code == '30') {
+                            cfCode30 = this.tableDataCashFlow[i].V1;
+
+                        }
+                        else if (this.tableDataCashFlow[i].code == '40') {
+                            cfCode40 = this.tableDataCashFlow[i].V1;
+                        }
+                        else if (this.tableDataCashFlow[i].code == '60') {
+                            cfCode60 = this.tableDataCashFlow[i].V1;
+                        }
+                        else if (this.tableDataCashFlow[i].code == '61') {
+                            cfCode61 = this.tableDataCashFlow[i].V1;
+                        }
+                        else if (this.tableDataCashFlow[i].code == '50') {
+
+                            this.tableDataCashFlow[i].V1 = Number(cfCode20) + Number(cfCode30) + Number(cfCode40);
+                            cfCode50 = this.tableDataCashFlow[i].V1;
+                            if (this.tableDataCashFlow[i].V1 == this.tableDataCashFlow[i].V0) {
+                                this.tableDataCashFlow[i].color = '#67C23A';
+                            } else {
+                                this.tableDataCashFlow[i].color = '#F56C6C';
+                            }
+                        }
+                        else if (this.tableDataCashFlow[i].code == '70') {
+                            this.tableDataCashFlow[i].V1 = Number(cfCode50) + Number(cfCode60) + Number(cfCode61);
+                            if (this.tableDataCashFlow[i].V1 == this.tableDataCashFlow[i].V0) {
+                                this.tableDataCashFlow[i].color = '#67C23A';
+                            } else {
+                                this.tableDataCashFlow[i].color = '#F56C6C';
+                            }
                         }
                     }
                 },
